@@ -1,0 +1,11 @@
+{
+    "docwriter.style": "XML",
+    "docify.commentService.docstringFormat": "XML",
+    "docify.commentService.sidePanelReviewMode": false,
+    "docify.commentService.moreExpressiveComments": false,
+    "docify.commentService.inlineComments": false,
+    "docify.commentService.programmingLanguage": "c_sharp",
+    "search.exclude":{
+        "**/Tests": true,
+    }
+}

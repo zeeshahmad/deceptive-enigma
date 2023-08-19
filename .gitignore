@@ -1,0 +1,5 @@
+Src/bin
+Src/obj
+Tests/bin
+Tests/obj
+Avalonia.AXAML.LanguageServer.Log*.txt
