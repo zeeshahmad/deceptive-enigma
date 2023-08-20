@@ -12,7 +12,7 @@ on:
 jobs:
   build:
     name: xUnit.net 
-    runs-on: linux-latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
