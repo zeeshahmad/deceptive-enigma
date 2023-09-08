@@ -12,12 +12,12 @@ public class Message : List<Word>
     private readonly List<string[]> connectorRules;
     
 
-    public Message(ConfigProvider config) {
+    public Message(IConfigProvider config) {
         periodTypes = config.PeriodPartsofspeech;
         connectorRules = ParseConnectorRules(config.Connectors);
     }
 
-    public Message(string stringToParse, AppDict dict, ConfigProvider config) {
+    public Message(string stringToParse, AppDict dict, IConfigProvider config) {
         periodTypes = config.PeriodPartsofspeech;
         connectorRules = ParseConnectorRules(config.Connectors);
 

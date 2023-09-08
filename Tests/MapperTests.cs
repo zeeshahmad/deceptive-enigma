@@ -2,9 +2,13 @@
 
 namespace deceptive_enigma;
 
-public class MapperTests
+public class MapperTests: IClassFixture<ConfigFixture>
 {
-    private readonly ConfigProvider config = new ("../../../../Src/"); //need to mock config
+    private readonly IConfigProvider config;
+
+    public MapperTests(ConfigFixture fixture) {
+        config = fixture.MockConfigProvider.Object;
+    }
 
     [Fact]
     public void Normal_Initialization()
@@ -43,9 +47,9 @@ public class MapperTests
         string encrypted2 = mapper.Encrypt("test2", "pass2");
         string encrypted3 = mapper.Encrypt("test2", "pass2");
 
-        Assert.Equal(encrypted3, encrypted2); // Rewind was called
-        Assert.Equal("Wood was concerning stomach is blue. Move was like tendency is frightening.", encrypted1);
-        Assert.Equal("Wood was concerning punishment is blue. Pull.", encrypted2);
+        Assert.Equal(encrypted3, encrypted2); // mapper was rewinded
+        Assert.Equal("Altogether yet happily yet voluntarily yet dreamily yet instantly yet upside-down yet absentmindedly yet awkwardly.", encrypted1);
+        Assert.Equal("Altogether yet happily yet generally yet dreamily yet well.", encrypted2);
     }
 
     [Fact]
@@ -53,11 +57,11 @@ public class MapperTests
     {
         Mapper mapper = new(config);
 
-        string decrypted1 = mapper.Decrypt("Wood was concerning stomach is blue. Move was like tendency is frightening.", "pass1");
-        string decrypted2 = mapper.Decrypt("Wood was concerning punishment is blue. Pull.", "pass2");
-        string decrypted3 = mapper.Decrypt("Wood was concerning punishment is blue. Pull.", "pass2");
+        string decrypted1 = mapper.Decrypt("Altogether yet happily yet voluntarily yet dreamily yet instantly yet upside-down yet absentmindedly yet awkwardly.", "pass1");
+        string decrypted2 = mapper.Decrypt("Altogether yet happily yet generally yet dreamily yet well.", "pass2");
+        string decrypted3 = mapper.Decrypt("Altogether yet happily yet generally yet dreamily yet well.", "pass2");
 
-        Assert.Equal(decrypted3, decrypted2); // Rewind was called
+        Assert.Equal(decrypted3, decrypted2); // mapper was rewinded
         Assert.Equal("test one", decrypted1);
         Assert.Equal("test2", decrypted2);
     }
@@ -95,7 +99,7 @@ public class MapperTests
     {
         Mapper mapper = new(config);
         string originalMessage = "this is an original message. wow";
-        string encrypted = bareWords(
+        string encrypted = BareWords(
             mapper.Encrypt(originalMessage, "some password"));
         
 
@@ -110,7 +114,7 @@ public class MapperTests
         }
     }
 
-    private string bareWords(string encrypted)
+    private string BareWords(string encrypted)
     {
         encrypted = encrypted.ToLower().Replace(".", string.Empty); //remove periods
 

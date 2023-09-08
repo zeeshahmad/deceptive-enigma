@@ -1,12 +1,15 @@
 
-using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
-
 namespace deceptive_enigma;
 
-public class MessageTests
+public class MessageTests :IClassFixture<ConfigFixture>
 {
-    private readonly ConfigProvider config = new ("../../../../Src/");//need to mock config
+
+    private readonly IConfigProvider config;
+
+    public MessageTests(ConfigFixture fixture)
+    {
+        config = fixture.MockConfigProvider.Object;
+    }
 
     [Fact]
     public void Normal_Initialization_Without_Params()

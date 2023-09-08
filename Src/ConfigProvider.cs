@@ -4,7 +4,7 @@ using System.IO;
 using YamlDotNet.Serialization;
 
 namespace deceptive_enigma;
-public class ConfigProvider
+public class ConfigProvider: IConfigProvider
 {
     static readonly Deserializer yamlDeserializer = new ();
 

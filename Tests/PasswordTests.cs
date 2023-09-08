@@ -3,9 +3,15 @@ using System.Text.RegularExpressions;
 
 namespace deceptive_enigma;
 
-public class PasswordTests
+public class PasswordTests: IClassFixture<ConfigFixture>
 {
-    private readonly ConfigProvider config = new ("../../../../Src/");//need to mock config
+
+    private readonly IConfigProvider config;
+
+    public PasswordTests(ConfigFixture fixture)
+    {
+        config = fixture.MockConfigProvider.Object;
+    }
 
     [Fact]
     public void Password_Initialization_Normal()

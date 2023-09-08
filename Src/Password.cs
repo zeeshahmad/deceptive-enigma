@@ -50,7 +50,7 @@ public class Password
     /// </summary>
     /// <param name="phrase">The string of characters serving as the starting point of the unmutated password.
     /// Akin to setting the initial position of the cylinders/drums in enigma.</param>
-    public Password(string phrase, ConfigProvider config)
+    public Password(string phrase, IConfigProvider config)
     {
         addend_position = 0;
         this.phrase = new(phrase);
