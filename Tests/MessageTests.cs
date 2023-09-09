@@ -98,17 +98,4 @@ public class MessageTests :IClassFixture<ConfigFixture>
     }
 
 
-    // private Message makeValidDummyMessage()
-    // {
-    //     AppDict dict = new(config.Dictionary);
-    //     string firstPos = dict.Keys.ToArray()[0];
-    //     Word firstWord = dict[firstPos][0];
-    //     string secondPos = config.PartsofspeechRules.Keys.ToArray()[0];
-    //     Word secondWord = dict[secondPos][1];
-    //     Message m = new(config);
-    //     m += firstWord;
-    //     m += secondWord;
-    //     return m;
-    // }
-
 }

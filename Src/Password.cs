@@ -11,13 +11,11 @@ namespace deceptive_enigma;
 /// </summary>
 public class Password
 {
-    // private static bool initialised = false;//to check whether setallowedchars was called
-
 
     /// <summary>
     /// Core string of a Password which is mutated as additives are accessed by user.
     /// </summary>
-    private readonly StringBuilder phrase;
+    public readonly StringBuilder phrase;
 
 
     /// <summary>

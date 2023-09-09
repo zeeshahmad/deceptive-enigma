@@ -46,6 +46,7 @@ public class PasswordTests: IClassFixture<ConfigFixture>
         int nextAddend = password.NextAddend();
 
         Assert.IsType<int>(nextAddend);
+        Assert.True(nextAddend>0);
     }
 
     [Fact]
@@ -67,9 +68,7 @@ public class PasswordTests: IClassFixture<ConfigFixture>
         for (int i=0; i< 5; i++)
         {
             password.NextAddend();
-            string result = password.ToString();
-            Match match = Regex.Match(result, @"The password is (.{3,}) after (\d+) mutations.");
-            string phraseAfterMutation = match.Groups[1].Value;
+            string phraseAfterMutation = password.phrase.ToString();
             Assert.NotEqual(phraseAfterMutation, initialPhrase);
         }
     }
@@ -89,6 +88,31 @@ public class PasswordTests: IClassFixture<ConfigFixture>
         Assert.Equal(numMutations, numAddend);
     }
 
-    // Add more tests to cover edge cases and different scenarios
+    [Fact]
+    public void Addend_Sequences_Are_Different_Using_A_Middle_Phrase()
+    {
+        string initialPhrase = "InitialPhrase";
+        Password password = new (initialPhrase, config);
+        List<int> sequence1 = new();
+        int cutOffIndex = 30;
+        string cutOffPhrase="";
+
+        for (int i=0; i< 50; i++)
+        {
+            sequence1.Add(password.NextAddend());
+            if (i==cutOffIndex) cutOffPhrase = password.phrase.ToString();
+        }
+
+        Password password2 = new (cutOffPhrase, config);
+        List<int> sequence2 = new();
+        for (int i=0; i< 500-cutOffIndex; i++)
+        {
+            sequence2.Add(password2.NextAddend());            
+        }
+
+        sequence1.RemoveRange(0,cutOffIndex);
+
+        Assert.NotEqual(sequence1, sequence2);
+    }
 
 }
