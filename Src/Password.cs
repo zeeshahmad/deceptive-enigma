@@ -11,13 +11,11 @@ namespace deceptive_enigma;
 /// </summary>
 public class Password
 {
-    // private static bool initialised = false;//to check whether setallowedchars was called
-
 
     /// <summary>
     /// Core string of a Password which is mutated as additives are accessed by user.
     /// </summary>
-    private readonly StringBuilder phrase;
+    public readonly StringBuilder phrase;
 
 
     /// <summary>
@@ -50,7 +48,7 @@ public class Password
     /// </summary>
     /// <param name="phrase">The string of characters serving as the starting point of the unmutated password.
     /// Akin to setting the initial position of the cylinders/drums in enigma.</param>
-    public Password(string phrase, ConfigProvider config)
+    public Password(string phrase, IConfigProvider config)
     {
         addend_position = 0;
         this.phrase = new(phrase);

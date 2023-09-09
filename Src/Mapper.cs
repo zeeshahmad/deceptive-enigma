@@ -40,9 +40,9 @@ public class Mapper
     /// </summary>
     private readonly Dictionary<string, List<string> > partsofspeechRules ; //stores the rules - which type can follow which
 
-    private readonly ConfigProvider config;
+    private readonly IConfigProvider config;
 
-    public Mapper(ConfigProvider config)
+    public Mapper(IConfigProvider config)
     {
         this.config = config;
         input_chars = config.AllowedChars;
@@ -159,7 +159,7 @@ public class Mapper
                 grandIndexCount++;
             }
         }
-        Console.WriteLine("cpp: Unexpected: Could not build up encrypted sequence of words.");
+        Console.WriteLine("Show error: Could not build up encrypted sequence of words. Could not pick the next word because the dictionary is too small.");
         return new Word("null","null");
     }
 

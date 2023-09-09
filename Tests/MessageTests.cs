@@ -1,12 +1,15 @@
 
-using System.Collections.ObjectModel;
-using System.Text.RegularExpressions;
-
 namespace deceptive_enigma;
 
-public class MessageTests
+public class MessageTests :IClassFixture<ConfigFixture>
 {
-    private readonly ConfigProvider config = new ("../../../../Src/");//need to mock config
+
+    private readonly IConfigProvider config;
+
+    public MessageTests(ConfigFixture fixture)
+    {
+        config = fixture.MockConfigProvider.Object;
+    }
 
     [Fact]
     public void Normal_Initialization_Without_Params()
@@ -94,18 +97,5 @@ public class MessageTests
         Assert.True(periodCount>=numWords/Message.periodThreshold);
     }
 
-
-    // private Message makeValidDummyMessage()
-    // {
-    //     AppDict dict = new(config.Dictionary);
-    //     string firstPos = dict.Keys.ToArray()[0];
-    //     Word firstWord = dict[firstPos][0];
-    //     string secondPos = config.PartsofspeechRules.Keys.ToArray()[0];
-    //     Word secondWord = dict[secondPos][1];
-    //     Message m = new(config);
-    //     m += firstWord;
-    //     m += secondWord;
-    //     return m;
-    // }
 
 }
